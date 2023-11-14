@@ -2,25 +2,25 @@ import { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
-    <div className="bg-slate-400 p-5 sm:py-20 sm:px-20 grid gap-10 lg:grid-cols-2 xl:grid-cols-3 min-h-screen xl:place-content-center">
-      <div className="bg-white p-6 rounded-3xl shadow-xl flex flex-col justify-between">
+    <div className="bg-slate-400 dark:bg-slate-600 p-5 sm:py-20 sm:px-20 grid gap-10 lg:grid-cols-2 xl:grid-cols-3 min-h-screen xl:place-content-center">
+      <div className="bg-white p-6 rounded-3xl shadow-xl flex flex-col justify-between dark:bg-black">
         <div>
-          <span className="font-semibold text-3xl">Select Item</span>
+          <span className="font-semibold text-3xl dark:text-white">Select Item</span>
           <div className="flex justify-between my-2 xl:pt-5">
-            <span className="text-gray-500">Tooly Table</span>
-            <span className="font-semiblod">$19</span>
+            <span className="text-gray-500 dark:text-gray-300">Gray Chair</span>
+            <span className="font-semiblod dark:text-white">$19</span>
           </div>
           <div className="flex justify-between my-2">
-            <span className="text-gray-500">Tooly Table</span>
-            <span className="font-semiblod">$80</span>
+            <span className="text-gray-500 dark:text-gray-300">Tooly Table</span>
+            <span className="font-semiblod dark:text-white">$80</span>
           </div>
         </div>
         <div>
           <div className="flex justify-between mt-2 pt-2 border-t-2 border-dashed">
-            <span>Total</span>
-            <span className="font-semiblod">$90</span>
+            <span className="dark:text-white">Total</span>
+            <span className="font-semiblod dark:text-white">$90</span>
           </div>
-          <button className="block mt-5 bg-blue-500 text-white p-3 text-center rounded-xl w-3/4 mx-auto hover:bg-teal-500 hover:text-black active:bg-yellow-500 focus:bg-red-500">
+          <button className="block mt-5 dark:bg-black dark:border-white dark:border bg-blue-500 text-white p-3 text-center rounded-xl w-3/4 mx-auto dark:hover:bg-white hover:bg-teal-500 hover:text-black active:bg-yellow-500 focus:bg-red-500">
             Checkout
           </button>
         </div>
