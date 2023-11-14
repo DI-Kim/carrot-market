@@ -9,12 +9,12 @@ export default function Enter() {
   const onEmailClick = () => setMethod("email");
   const onPhoneClick = () => setMethod("phone");
   return (
-    <div className="mt-16">
+    <div className="mt-16 px-4">
       <h3 className="text-center text-3xl font-bold">Enter to Carrot</h3>
       <div className="mt-8">
         <div className="flex flex-col items-center">
           <h5 className="text-sm font-medium text-gray-500">Enter using:</h5>
-          <div className="mt-8 grid w-full grid-cols-2 gap-16">
+          <div className="mt-8 grid w-full grid-cols-2 gap-16 border-b">
             <button
               onClick={onEmailClick}
               className={cls(
@@ -39,36 +39,50 @@ export default function Enter() {
             </button>
           </div>
         </div>
-        <form>
-          <label>
+        <form className="mt-8 flex flex-col">
+          <label className="text-sm font-medium text-gray-700">
             {method === "email" ? "Email address" : null}
             {method === "phone" ? "Phone number" : null}
           </label>
-          <div>
-            {method === "email" ? <input type="email" required /> : null}
+          <div className="mt-1">
+            {method === "email" ? (
+              <input
+                type="email"
+                required
+                className="w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500"
+              />
+            ) : null}
             {method === "phone" ? (
-              <div>
-                <span>+82</span>
-                <input type="number" required />
+              <div className="flex rounded-md shadow-sm">
+                <span className="flex select-none items-center justify-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
+                  +82
+                </span>
+                <input
+                  className="w-full appearance-none rounded-r-md border border-l-0 border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500"
+                  type="number"
+                  required
+                />
               </div>
             ) : null}
           </div>
-          <button>
+          <button className="focus:ring-offset-5 mt-6 rounded-md border border-transparent bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500">
             {method === "email" ? "Get login link" : null}
             {method === "phone" ? "Get one-time password" : null}
           </button>
         </form>
-        <div>
-          <div>
-            <div />
-            <div>
-              <span>Or enter with</span>
+        <div className="mt-8">
+          <div className="relative">
+            <div className="absolute w-full border-t" />
+            <div className="relative -top-3 text-center">
+              <span className="bg-white px-2 text-sm text-gray-500">
+                Or enter with
+              </span>
             </div>
           </div>
           {/* social login */}
-          <div>
+          <div className="mt-2 grid grid-cols-2 gap-3">
             {/* twitter */}
-            <button>
+            <button className="flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
               <svg
                 className="h-5 w-5"
                 aria-hidden="true"
@@ -79,7 +93,7 @@ export default function Enter() {
               </svg>
             </button>
             {/* gitgub */}
-            <button>
+            <button className="flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
               <svg
                 className="h-5 w-5"
                 aria-hidden="true"
