@@ -22,19 +22,41 @@ export default function Layout({
   };
   return (
     <div>
-      <div
-        className={cls(
-          !canGoBack ? "justify-center" : "justify-between",
-          "fixed top-0 flex w-full max-w-lg items-center border-b bg-white px-10 py-3 text-lg font-medium text-gray-800",
-        )}
-      >
-        {canGoBack ? <button onClick={onClick}>&larr;</button> : null}
-        {title ? <span>{title}</span> : null}
+      <div className="fixed top-0 flex h-12 w-full max-w-xl items-center justify-center  border-b bg-white px-10 text-lg  font-medium text-gray-800">
+        {canGoBack ? (
+          <button onClick={onClick} className="absolute left-4">
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M15 19l-7-7 7-7"
+              ></path>
+            </svg>
+          </button>
+        ) : null}
+        {title ? (
+          <span className={cls(canGoBack ? "mx-auto" : "", "")}>{title}</span>
+        ) : null}
       </div>
       <div className={cls("pt-12", hasTabBar ? "pb-24" : "")}>{children}</div>
       {hasTabBar ? (
         <nav className="fixed bottom-0 flex w-full max-w-lg items-center justify-around border-t bg-white pb-5 pt-3 text-gray-800">
-          <Link href="/" className="flex flex-col items-center space-y-2">
+          <Link
+            href="/"
+            className={cls(
+              "flex flex-col items-center space-y-2",
+              router.pathname === "/"
+                ? "text-orange-500"
+                : "transition-colors hover:text-gray-500",
+            )}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -54,7 +76,12 @@ export default function Layout({
 
           <Link
             href="/community"
-            className="flex flex-col items-center space-y-2"
+            className={cls(
+              "flex flex-col items-center space-y-2",
+              router.pathname === "/community"
+                ? "text-orange-500"
+                : "transition-colors hover:text-gray-500",
+            )}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +100,15 @@ export default function Layout({
             <span>동네생활</span>
           </Link>
 
-          <Link href="/chats" className="flex flex-col items-center space-y-2">
+          <Link
+            href="/chats"
+            className={cls(
+              "flex flex-col items-center space-y-2",
+              router.pathname === "/chats"
+                ? "text-orange-500"
+                : "transition-colors hover:text-gray-500",
+            )}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -90,7 +125,15 @@ export default function Layout({
             </svg>
             <span>채팅</span>
           </Link>
-          <Link href="/live" className="flex flex-col items-center space-y-2">
+          <Link
+            href="/live"
+            className={cls(
+              "flex flex-col items-center space-y-2",
+              router.pathname === "/live"
+                ? "text-orange-500"
+                : "transition-colors hover:text-gray-500",
+            )}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -108,7 +151,12 @@ export default function Layout({
           </Link>
           <Link
             href="/profile"
-            className="flex flex-col items-center space-y-2"
+            className={cls(
+              "flex flex-col items-center space-y-2",
+              router.pathname === "/profile"
+                ? "text-orange-500"
+                : "transition-colors hover:text-gray-500",
+            )}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
