@@ -4,6 +4,7 @@ interface IForm {
   username: string;
   password: string;
   email: string;
+  formError?: string;
 }
 //! mode -> 유저가 입력하는 중에 validation 검사  default: onSubmit
 
@@ -12,12 +13,19 @@ export default function Forms() {
     register,
     handleSubmit,
     formState: { errors },
+    // setError: 특정 input이 아닌 form에 대한 에러 처리, ex) 백엔드, 디비 에러 등
+    setError,
+    reset,
+    resetField,
   } = useForm<IForm>({
     mode: "onBlur",
   });
 
   const onValid = (data: IForm) => {
     console.log("good");
+    setError("formError", { message: "backend is offline, sorry guys" });
+    resetField("password"); // 선택한 필드만 초기화
+    reset(); // 모든 필드 초기화
   };
   const onInvalid = (errors: FieldErrors) => {
     console.log(errors);
@@ -63,6 +71,7 @@ export default function Forms() {
       {errors.password?.message}
 
       <input type="submit" value="Create Account" />
+      {errors.formError?.message}
     </form>
   );
 }
