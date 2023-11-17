@@ -10,11 +10,26 @@ type UseMutationResult = [(data: any) => void, UseMutationState];
 
 //return [function, object]
 export default function useMutation(url: string): UseMutationResult {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState(undefined);
-  const [error, setError] = useState(undefined);
+  const [states, setStates] = useState({
+    loading: false,
+    data: undefined,
+    error: undefined,
+  });
 
-  function mutation(data: any) {}
+  function mutation(data: any) {
+    setStates((prev) => ({ ...prev, loading: true }));
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json().catch(() => {}))
+      .then((json) => setStates((prev) => ({ ...prev, data: json })))
+      .catch((error) => setStates((prev) => ({ ...prev, error: error })))
+      .finally(() => setStates((prev) => ({ ...prev, loading: false })));
+  }
 
-  return [mutation, { loading, data, error }];
+  return [mutation, { ...states }];
 }
