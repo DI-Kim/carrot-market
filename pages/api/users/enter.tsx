@@ -5,57 +5,27 @@ import { NextApiRequest, NextApiResponse } from "next";
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { phone, email } = req.body;
 
-  const payload = phone ? { phone: +phone } : { email };
+  const payload = Math.floor(100000 + Math.random() * 900000) + "";
+  const user = phone ? { phone: +phone } : { email };
   //upsert
-  const user = await client.user.upsert({
-    where: {
-      ...payload,
+  const token = await client.token.create({
+    data: {
+      payload: payload,
+      user: {
+        // 유저가 있으면 connect, 유저가 없으면 create
+        connectOrCreate: {
+          where: {
+            ...user,
+          },
+          create: {
+            name: "Anonymous",
+            ...user,
+          },
+        },
+      },
     },
-    create: {
-      name: "Anonymous",
-      ...payload,
-    },
-    update: {},
   });
-  console.log(user);
-
-  // if (email) {
-  //   user = await client.user.findUnique({
-  //     where: {
-  //       email: email,
-  //     },
-  //   });
-  //   if (user) console.log("Find User", user);
-  //   if (!user) {
-  //     console.log("Did not find. Will create");
-  //     user = await client.user.create({
-  //       data: {
-  //         name: "Anonymous",
-  //         email: email,
-  //       },
-  //     });
-  //   }
-  //   console.log(user);
-  // }
-
-  // if (phone) {
-  //   user = await client.user.findUnique({
-  //     where: {
-  //       phone: +phone,
-  //     },
-  //   });
-  //   if (user) console.log("Find User", user);
-  //   if (!user) {
-  //     console.log("Did not find. Will create");
-  //     user = await client.user.create({
-  //       data: {
-  //         name: "Anonymous",
-  //         phone: +phone,
-  //       },
-  //     });
-  //   }
-  //   console.log(user);
-  // }
+  console.log(token);
 
   return res.json({ ok: true });
 }
