@@ -5,6 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Twilio } from "twilio";
 
 const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
+//! email은 사이트(sendgrid) 인증이 오래 걸려서 넘어감
 
 async function handler(
   req: NextApiRequest,
