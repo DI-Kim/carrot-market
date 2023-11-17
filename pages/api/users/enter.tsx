@@ -8,3 +8,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 }
 
 export default withHandler("POST", handler);
+/**
+ * login ways
+ * phone number -> user is exist?
+ * --> token --> user #123456
+ * --> #123456 --> SMS --> phon number (twilio)
+ * --> #123456 --> token is exist? --> user --> login
+ */
